@@ -33,11 +33,24 @@ exports.login = async (username, password) => {
     }
     const isMatch = await user.comparePassword(password);
     if (isMatch) {
-      return { success: true, user };
+      return { 
+        success: true, 
+        user 
+      };
     } else {
       return { success: false, message: 'Contraseña incorrecta' };
     }
   } catch (error) {
     return { success: false, message: error.message };
+  }
+};
+
+// Nueva función para validar el acceso a la descarga
+exports.validarAccesoDescarga = async (username) => {
+  try {
+    const accesoInfo = await ObjectPersonDAL.validarAccesoDescarga(username);
+    return accesoInfo;
+  } catch (error) {
+    return { acceso: false, message: error.message };
   }
 };

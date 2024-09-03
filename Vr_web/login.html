@@ -183,10 +183,10 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', async function(event) {
             event.preventDefault();
-
+    
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
+    
             try {
                 const response = await fetch('http://localhost:4000/login', {
                     method: 'POST',
@@ -195,13 +195,14 @@
                     },
                     body: JSON.stringify({ username, password })
                 });
-
+    
                 const result = await response.json();
-
+    
                 if (response.ok) {
                     if (result.mensaje === 'Login exitoso') {
                         alert('Login exitoso');
-                        // Aquí puedes redirigir al usuario a otra página si es necesario
+                        localStorage.setItem('username', username); // Guardar el username en localStorage
+                        window.location.href = 'index.html'; // Redirigir al index.html
                     } else {
                         alert(result.mensaje);
                     }
@@ -214,6 +215,7 @@
             }
         });
     </script>
+    
 </body>
 
 </html>

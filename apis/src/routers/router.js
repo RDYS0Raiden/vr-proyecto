@@ -5,4 +5,5 @@ const logincontroller = require('../controllers/logincontroller');
 router.post('/crear',DatosController.datosAgregados);
 router.post('/addpract',DatosController.addpracticas);
 router.post('/login',logincontroller.login);
+router.post('/verificar',logincontroller.verificarAccesoDescarga);
 module.exports = router;

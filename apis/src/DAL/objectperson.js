@@ -43,7 +43,29 @@ async function buscarUsuarioPorUsername(username) {
   }
 }
 
+async function validarAccesoDescarga(username) {
+  try {
+    const usuario = await buscarUsuarioPorUsername(username);
+
+    if (usuario) {
+      // Si el usuario existe, devolvemos su rol y un indicador de acceso
+      return {
+        acceso: true,
+        rol: usuario.rol
+      };
+    } else {
+      // Si no existe, devolvemos que no tiene acceso
+      return {
+        acceso: false,
+        rol: null
+      };
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
-  agregarDatoUsuario,buscarUsuarioPorUsername,
+  agregarDatoUsuario,buscarUsuarioPorUsername,validarAccesoDescarga,
   // Exporta otras funciones aquí si es necesario...
 };
