@@ -16,10 +16,6 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.min.css" rel="stylesheet">
 </head>
@@ -40,8 +36,6 @@
                     <a href="login.html" class="nav-item nav-link" id="login-link">Inicio de Sesión</a>
                     <a href="register.html" class="nav-item nav-link active" id="register-link">Registrarse</a>
                     <a href="beneficios.html" class="nav-item nav-link">Beneficios</a>
-                    
-                    
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
                     <a href="#" onclick="logout()" class="nav-item nav-link" id="logout-link" style="display: none;">Cerrar Sesión</a>
                 </div>
@@ -82,20 +76,21 @@
                                 Completa el formulario para empezar a disfrutar de nuestros servicios y simulaciones con realidad virtual.
                             </p>
                         </div>
-                        
                     </div>
                     <div class="col-lg-6">
                         <div class="text-center p-5" style="background: rgba(148, 187, 185, 0.8);">
                             <h1 class="text-white mb-4 mt-5">Regístrate</h1>
                             <form id="registerForm" class="mb-5">
                                 <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4" id="name" placeholder="Nombre" required="required" />
+                                    <input type="text" class="form-control bg-transparent border-primary p-4" id="name" maxlength="35" placeholder="Nombre" required="required" />
+                                    <p class="text-danger" id="nameError" style="display:none;">En este campo no se permiten números</p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4" id="lastName" placeholder="Apellido" required="required" />
+                                    <input type="text" class="form-control bg-transparent border-primary p-4" id="lastName" maxlength="35" placeholder="Apellido" required="required" />
+                                    <p class="text-danger" id="lastNameError" style="display:none;">En este campo no se permiten números</p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4" id="username" placeholder="Nombre de Usuario" required="required" />
+                                    <input type="text" class="form-control bg-transparent border-primary p-4" id="username" maxlength="25" placeholder="Nombre de Usuario" required="required" />
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select bg-light border-primary px-4" id="role" required="required" style="height: 55px; font-size: 18px; color: #000000; background-color: #f8f9fa; border-width: 2px; margin-bottom: 20px;">
@@ -104,12 +99,13 @@
                                         <option value="estudiante">Estudiante</option>
                                     </select>
                                 </div>
-                                
                                 <div class="form-group">
                                     <input type="password" class="form-control bg-transparent border-primary p-4" id="password" placeholder="Contraseña" required="required" />
+                                    <p class="text-danger" id="passwordError" style="display:none;">Contraseña insegura</p>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control bg-transparent border-primary p-4" id="email" placeholder="Correo Electrónico" required="required" />
+                                    <p class="text-danger" id="emailError" style="display:none;">Correo no permitido</p>
                                 </div>
                                 <div class="form-group">
                                     <input type="tel" class="form-control bg-transparent border-primary p-4" id="phone" placeholder="Número de Teléfono" required="required" />
@@ -126,96 +122,83 @@
     </div>
     <!-- Registration Form End -->
 
-    <!-- Footer Start -->
-    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
-        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">PONTE EN CONTACTO</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>Av. Argentina Nro 2083,Miraflores</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>+591 77277872</p>
-                
-            </div>
-
-
-            <div class="col-lg-3 col-md-6 mb-5" style="margin-left: auto; margin-right: 0;">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">SIGUENOS</h4>
-                <p>Siguenos en nuestras redes sociales</p>
-                <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            
-            
-            
-            
-            
-
-            
-        </div>
-        
-    </div>
-    <!-- Footer End -->
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-
     <script>
-        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+        // Función para validar que no se permita escribir números en el campo
+        function validarTextoSinNumeros(event, inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+
+            if (/\d/.test(event.key)) {
+                event.preventDefault();  // Impide la entrada de números
+                error.style.display = 'block';
+            } else {
+                error.style.display = 'none';
+            }
+        }
+
+        document.getElementById('name').addEventListener('keypress', function(event) {
+            validarTextoSinNumeros(event, 'name', 'nameError');
+        });
+
+        document.getElementById('lastName').addEventListener('keypress', function(event) {
+            validarTextoSinNumeros(event, 'lastName', 'lastNameError');
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
+            // Validar nombre
             const name = document.getElementById('name').value;
-            const lastName = document.getElementById('lastName').value;
-            const username = document.getElementById('username').value;
-            const role = document.getElementById('role').value;
-            const password = document.getElementById('password').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-
-            const data = {
-                name: name,
-                lastname: lastName,
-                username: username,
-                rol: role,
-                password: password,
-                correo: email,
-                numerophone: phone
-            };
-
-            try {
-                const response = await fetch('http://localhost:4000/crear', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-                alert(result.mensaje);
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Hubo un problema al enviar el formulario.');
+            if (/[^a-zA-Z\s]/.test(name)) {
+                alert('El nombre no debe contener números.');
+                return;
             }
+
+            // Validar apellido
+            const lastName = document.getElementById('lastName').value;
+            if (/[^a-zA-Z\s]/.test(lastName)) {
+                alert('El apellido no debe contener números.');
+                return;
+            }
+
+            // Validar contraseña
+            const password = document.getElementById('password').value;
+            if (password.length < 8) {
+                document.getElementById('passwordError').style.display = 'block';
+                return;
+            } else if (password.length > 16) {
+                alert('La contraseña no debe exceder los 16 caracteres.');
+                return;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+
+            // Validar correo electrónico
+            const email = document.getElementById('email').value;
+            if (!email.endsWith('@est.univalle.edu')) {
+                document.getElementById('emailError').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            // Validar número de teléfono
+            const phone = document.getElementById('phone').value;
+            if (/\D/.test(phone)) {
+                alert('El número de teléfono no debe contener letras.');
+                return;
+            }
+
+            // Enviar el formulario si todo está correcto
+            alert('Registro exitoso.');
         });
     </script>
 </body>
