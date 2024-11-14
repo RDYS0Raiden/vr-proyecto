@@ -21,6 +21,9 @@ const DatosUsu = new Schema({
   puntageINYE: {type:Number,required:true},
   tiempoINYE:{type:Number,required:true},
 
+  puntageCUEST_EN: {type:Number,required:true},
+  puntageCUEST_OP: {type:Number,required:true},
+  
 });
 
 

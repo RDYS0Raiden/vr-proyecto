@@ -131,76 +131,91 @@
 
     <!-- Template Javascript -->
     <script>
-        // Función para validar que no se permita escribir números en el campo
-        function validarTextoSinNumeros(event, inputId, errorId) {
-            const input = document.getElementById(inputId);
-            const error = document.getElementById(errorId);
-
-            if (/\d/.test(event.key)) {
-                event.preventDefault();  // Impide la entrada de números
-                error.style.display = 'block';
-            } else {
-                error.style.display = 'none';
-            }
-        }
-
-        document.getElementById('name').addEventListener('keypress', function(event) {
-            validarTextoSinNumeros(event, 'name', 'nameError');
-        });
-
-        document.getElementById('lastName').addEventListener('keypress', function(event) {
-            validarTextoSinNumeros(event, 'lastName', 'lastNameError');
-        });
-
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
             event.preventDefault();
-
+    
             // Validar nombre
             const name = document.getElementById('name').value;
             if (/[^a-zA-Z\s]/.test(name)) {
                 alert('El nombre no debe contener números.');
                 return;
             }
-
+    
             // Validar apellido
             const lastName = document.getElementById('lastName').value;
             if (/[^a-zA-Z\s]/.test(lastName)) {
                 alert('El apellido no debe contener números.');
                 return;
             }
-
+    
             // Validar contraseña
             const password = document.getElementById('password').value;
             if (password.length < 8) {
-                document.getElementById('passwordError').style.display = 'block';
+                alert('La contraseña debe tener al menos 8 caracteres.');
                 return;
             } else if (password.length > 16) {
                 alert('La contraseña no debe exceder los 16 caracteres.');
                 return;
-            } else {
-                document.getElementById('passwordError').style.display = 'none';
             }
-
+    
             // Validar correo electrónico
             const email = document.getElementById('email').value;
             if (!email.endsWith('@est.univalle.edu')) {
-                document.getElementById('emailError').style.display = 'block';
+                alert('El correo debe terminar en @est.univalle.edu.');
                 return;
-            } else {
-                document.getElementById('emailError').style.display = 'none';
             }
-
+    
             // Validar número de teléfono
             const phone = document.getElementById('phone').value;
             if (/\D/.test(phone)) {
                 alert('El número de teléfono no debe contener letras.');
                 return;
             }
-
-            // Enviar el formulario si todo está correcto
-            alert('Registro exitoso.');
+    
+            // Obtener el rol
+            const role = document.getElementById('role').value;
+            if (!role) {
+                alert('Por favor, selecciona un rol.');
+                return;
+            }
+    
+            // Preparar los datos para enviar al backend
+            const data = {
+                name: name,
+                lastname: lastName,
+                username: document.getElementById('username').value,
+                rol: role,
+                password: password,
+                correo: email,
+                numerophone: phone
+            };
+    
+            try {
+                // Hacer la solicitud POST al backend
+                const response = await fetch('http://localhost:4000/crear', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+    
+                const result = await response.json();
+    
+                // Mostrar el resultado
+                if (response.ok) {
+                    alert(result.mensaje || 'Registro exitoso.');
+                    window.location.href = 'login.html'; // Redirigir al login después del registro
+                } else {
+                    alert(result.mensaje || 'Error al registrar el usuario.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Ocurrió un error al conectar con el servidor.');
+            }
         });
     </script>
+    
 </body>
 
 </html>

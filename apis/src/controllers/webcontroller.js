@@ -9,7 +9,8 @@ exports.datosAgregados= async (req, res) => {
     rol,
     password,
     correo,
-    numerophone,  
+    numerophone,
+    status=true,  
     } = req.body;
 
     
@@ -49,7 +50,11 @@ exports.addpracticas= async (req, res) => {
     tiempoCARI,
     
     puntageINYE,
-    tiempoINYE, 
+    tiempoINYE,
+
+    puntageCUEST_EN,
+    puntageCUEST_OP,
+
     } = req.body;
 
     
@@ -67,7 +72,11 @@ exports.addpracticas= async (req, res) => {
         tiempoCARI,
         
         puntageINYE,
-        tiempoINYE,  
+        tiempoINYE,
+
+      puntageCUEST_EN,
+      puntageCUEST_OP
+
       );
       // El controlador solo necesita comprobar el mensaje de éxito
       if (resultado === '¡Practica guardada correctamente!') {
