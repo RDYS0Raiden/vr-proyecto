@@ -1,7 +1,8 @@
 const LogicaNegocios = require('../Logica De Negocio/datosLN');
 const resultados = require('../Logica De Negocio/practicasLN');
 exports.datosAgregados= async (req, res) => {
-    
+  
+
   const {
     name,
     lastname,
@@ -28,10 +29,10 @@ exports.datosAgregados= async (req, res) => {
       if (resultado === '¡Registro guardado correctamente!') {
         res.json({ mensaje: resultado });
       } else {
-        res.json({ mensaje: resultado });
+        res.status(400).json({ mensaje: resultado });
       }
     } catch (error) {
-      res.json({ mensaje: error.message });
+      res.status(500).json({ mensaje: 'Error al registrar el usuario.' });
     }
 };
 

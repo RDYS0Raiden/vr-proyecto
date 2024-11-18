@@ -16,6 +16,7 @@ exports.practicasagregadas = async (user, puntageRESTA, tiempoRESTA, puntageINS,
             tiempoINYE,
             puntageCUEST_EN,
             puntageCUEST_OP
+
         );
 
         return resultado;

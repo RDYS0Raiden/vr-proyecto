@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const {Schema,model} = mongoose;
 const bcrypt = require('bcrypt');
+const { unique } = require('underscore');
 
 const userSchema = new Schema({
   name: {type:String,required:true},
   lastname: {type:String,required:true},
-  username: {type:String,required:true},
+  username: {type:String,required:true, unique: true},
   rol: {type:String,required:true},
   password: {type:String,required:true},
   correo: {type:String,required:true},

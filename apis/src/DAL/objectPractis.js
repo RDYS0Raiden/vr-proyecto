@@ -83,38 +83,107 @@ async function agregarPracticas(
         throw error;
     }
 }
+
 async function guardarOActualizarPuntaje(userId, puntageCUEST_EN) {
   try {
-      const practicaExistente = await Reglas.findOne({ user: userId });
-
-      if (practicaExistente) {
-          // Actualizar el puntaje
-          practicaExistente.puntageCUEST_EN = puntageCUEST_EN;
-          await practicaExistente.save();
-          return "Puntaje actualizado correctamente.";
-      } else {
-          // Crear una nueva práctica
-          const nuevaPractica = new Reglas({
-              user: userId,
-              puntageCUEST_EN: puntageCUEST_EN,
-              puntageRESTA: 0,
-              tiempoRESTA: 0,
-              puntageINS: 0,
-              tiempoINS: 0,
-              puntageCARI: 0,
-              tiempoCARI: 0,
-              puntageINYE: 0,
-              tiempoINYE: 0,
-              puntageCUEST_OP: 0,
-          });
-          await nuevaPractica.save();
-          return "Puntaje guardado correctamente.";
-      }
+      await Reglas.updateOne(
+          { user: userId },
+          {
+              $set: {
+                  puntageCUEST_EN: puntageCUEST_EN
+                  
+              },
+          },
+          { upsert: true } // Crea el documento si no existe
+      );
+      return "Puntaje EN guardado o actualizado correctamente.";
   } catch (error) {
-      console.error("Error al guardar o actualizar el puntaje:", error.message);
+      console.error("Error al guardar o actualizar el puntaje EN:", error.message);
       throw error;
   }
 }
+
+
+async function guardarOActualizarPuntajeOP(userId, puntageCUEST_OP) {
+  try {
+      // Usamos updateOne con $set para actualizar o crear el campo
+      await Reglas.updateOne(
+          { user: userId },
+          {
+              $set: {
+                  puntageCUEST_OP: puntageCUEST_OP
+                  
+              },
+          },
+          { upsert: true } // Crea el documento si no existe
+      );
+      return "Puntaje OP guardado o actualizado correctamente.";
+  } catch (error) {
+      console.error("Error al guardar o actualizar el puntaje OP:", error.message);
+      throw error;
+  }
+}
+
+
+async function guardarOActualizarPuntajeICDAS(userId, puntageICDAS) {
+    try {
+      await Reglas.updateOne(
+        { user: userId },
+        {
+          $set: {
+            puntageICDAS: puntageICDAS,
+          },
+        },
+        { upsert: true }
+      );
+      return "Puntaje ICDAS guardado o actualizado correctamente.";
+    } catch (error) {
+      console.error("Error al guardar o actualizar el puntaje ICDAS:", error.message);
+      throw error;
+    }
+  }
+
+  async function guardarOActualizarPuntajeINYE(userId, puntageINYE) {
+    try {
+        await Reglas.updateOne(
+            { user: userId },
+            {
+                $set: {
+                    puntageINYE: puntageINYE
+                    
+                },
+            },
+            { upsert: true } // Crea el documento si no existe
+        );
+        return "Puntaje INYE guardado o actualizado correctamente.";
+    } catch (error) {
+        console.error("Error al guardar o actualizar el puntaje INYE:", error.message);
+        throw error;
+    }
+}
+
+
+async function guardarOActualizarPuntajeINS(userId, puntageINS) {
+  try {
+      // Usar updateOne con upsert para guardar o actualizar el puntaje de INS
+      await Reglas.updateOne(
+          { user: userId },
+          {
+              $set: {
+                  puntageINS: puntageINS
+              },
+          },
+          { upsert: true } // Crea el documento si no existe
+      );
+      return "Puntaje INS guardado o actualizado correctamente.";
+  } catch (error) {
+      console.error("Error al guardar o actualizar el puntaje INS:", error.message);
+      throw error;
+  }
+}
+
 module.exports = {
-    agregarPracticas,actualizarPracticas,guardarOActualizarPuntaje
+    agregarPracticas,actualizarPracticas,
+    guardarOActualizarPuntaje,guardarOActualizarPuntajeOP,
+    guardarOActualizarPuntajeICDAS,guardarOActualizarPuntajeINYE,guardarOActualizarPuntajeINS
 }

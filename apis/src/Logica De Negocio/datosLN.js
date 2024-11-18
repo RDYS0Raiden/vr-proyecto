@@ -4,7 +4,14 @@ const ObjectReglas = require("../DAL/objectPractis");
 
 exports.datosAgregados = async (name,lastname,username,rol,password,correo,numerophone) => {
     
+
   try {
+    // Verificar si el nombre de usuario ya existe
+    const userExists = await ObjectPersonDAL.buscarUsuarioPorUsername(username);
+    if (userExists) {
+      return 'El nombre de usuario ya existe. Inténtalo de nuevo.';
+    }
+  
     const resultado = await ObjectPersonDAL.agregarDatoUsuario(
       name,
       lastname,
