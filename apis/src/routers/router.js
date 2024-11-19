@@ -18,6 +18,6 @@ router.post('/guardarPuntajeINYE', practicasController.guardarPuntajeInyeccion);
 router.post('/guardarPuntajeINS', practicasController.guardarPuntajeINS);
 router.post('/guardarPuntajeRECO', practicasController.guardarPuntajeRECO);
 router.post('/guardarPuntajeRESTA', practicasController.guardarPuntajeRESTA);
-
+//nuevo con todo los cambios nuevos
 
 module.exports = router;
