@@ -121,3 +121,55 @@ exports.guardarPuntajeINS = async (req, res) => {
         res.status(500).json({ mensaje: "Error al guardar o actualizar el puntaje INS.", error: error.message });
     }
 };
+
+exports.guardarPuntajeRECO = async (req, res) => {
+    try {
+        const { username, puntageRECO } = req.body;
+
+        console.log("Datos recibidos en la solicitud:", req.body);
+
+        // Verificar si el username está definido
+        if (!username) {
+            return res.status(400).json({ mensaje: "El campo 'username' es requerido." });
+        }
+
+        // Buscar al usuario por username
+        const usuario = await objectPerson.buscarUsuarioPorUsernamep(username);
+        if (!usuario) {
+            return res.status(404).json({ mensaje: "Usuario no encontrado." });
+        }
+
+        // Guardar o actualizar el puntaje RECO
+        const resultado = await objectPractis.guardarOActualizarPuntajeRECO(usuario._id, puntageRECO);
+        return res.status(200).json({ mensaje: resultado });
+    } catch (error) {
+        console.error("Error en guardarPuntajeRECO:", error.message);
+        res.status(500).json({ mensaje: "Error al guardar o actualizar el puntaje RECO.", error: error.message });
+    }
+};
+
+exports.guardarPuntajeRESTA = async (req, res) => {
+    try {
+        const { username, puntageRESTA } = req.body;
+
+        console.log("Datos recibidos en la solicitud:", req.body);
+
+        // Verificar si el username está definido
+        if (!username) {
+            return res.status(400).json({ mensaje: "El campo 'username' es requerido." });
+        }
+
+        // Buscar al usuario por username
+        const usuario = await objectPerson.buscarUsuarioPorUsernamep(username);
+        if (!usuario) {
+            return res.status(404).json({ mensaje: "Usuario no encontrado." });
+        }
+
+        // Guardar o actualizar el puntaje RESTA
+        const resultado = await objectPractis.guardarOActualizarPuntajeRESTA(usuario._id, puntageRESTA);
+        return res.status(200).json({ mensaje: resultado });
+    } catch (error) {
+        console.error("Error en guardarPuntajeRESTA:", error.message);
+        res.status(500).json({ mensaje: "Error al guardar o actualizar el puntaje RESTA.", error: error.message });
+    }
+};

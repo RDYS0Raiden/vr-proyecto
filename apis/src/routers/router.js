@@ -16,5 +16,8 @@ router.post('/guardarPuntajeOP', practicasController.guardarPuntajeCuestionarioO
 router.post("/guardarPuntajeICDAS", practicasController.guardarPuntajeICDAS);
 router.post('/guardarPuntajeINYE', practicasController.guardarPuntajeInyeccion);
 router.post('/guardarPuntajeINS', practicasController.guardarPuntajeINS);
+router.post('/guardarPuntajeRECO', practicasController.guardarPuntajeRECO);
+router.post('/guardarPuntajeRESTA', practicasController.guardarPuntajeRESTA);
+
 
 module.exports = router;

@@ -182,8 +182,54 @@ async function guardarOActualizarPuntajeINS(userId, puntageINS) {
   }
 }
 
+// objectPractis.js
+
+async function guardarOActualizarPuntajeRECO(userId, puntageRECO) {
+    try {
+        // Usar updateOne con upsert para actualizar o crear el puntaje de RECO
+        await Reglas.updateOne(
+            { user: userId },
+            {
+                $set: {
+                    puntageRECO: puntageRECO,
+                },
+            },
+            { upsert: true } // Crea el documento si no existe
+        );
+        return "Puntaje RECO guardado o actualizado correctamente.";
+    } catch (error) {
+        console.error("Error al guardar o actualizar el puntaje RECO:", error.message);
+        throw error;
+    }
+}
+
+// objectPractis.js
+
+async function guardarOActualizarPuntajeRESTA(userId, puntageRESTA) {
+  try {
+      // Usar updateOne con upsert para actualizar o crear el puntaje de RESTA
+      await Reglas.updateOne(
+          { user: userId },
+          {
+              $set: {
+                  puntageRESTA: puntageRESTA,
+              },
+          },
+          { upsert: true } // Crea el documento si no existe
+      );
+      return "Puntaje RESTA guardado o actualizado correctamente.";
+  } catch (error) {
+      console.error("Error al guardar o actualizar el puntaje RESTA:", error.message);
+      throw error;
+  }
+}
+
+
+
+
 module.exports = {
     agregarPracticas,actualizarPracticas,
     guardarOActualizarPuntaje,guardarOActualizarPuntajeOP,
-    guardarOActualizarPuntajeICDAS,guardarOActualizarPuntajeINYE,guardarOActualizarPuntajeINS
+    guardarOActualizarPuntajeICDAS,guardarOActualizarPuntajeINYE,
+    guardarOActualizarPuntajeINS,guardarOActualizarPuntajeRECO,guardarOActualizarPuntajeRESTA,
 }

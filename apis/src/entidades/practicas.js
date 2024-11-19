@@ -23,8 +23,9 @@ const DatosUsu = new Schema({
 
   puntageCUEST_EN: {type:Number,required:true},
   puntageCUEST_OP: {type:Number,required:true},
-  puntageICDAS: { type: Number, required: true,},
-  
+  puntageICDAS: { type: Number, required: true},
+  puntageRECO: { type: Number, required: true},
+
 });
 
 
