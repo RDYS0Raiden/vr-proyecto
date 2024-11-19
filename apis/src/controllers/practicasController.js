@@ -173,3 +173,7 @@ exports.guardarPuntajeRESTA = async (req, res) => {
         res.status(500).json({ mensaje: "Error al guardar o actualizar el puntaje RESTA.", error: error.message });
     }
 };
+
+//codigo de poder ver a los estudiantes en la pagina web:
+
+//aqui se cierra todo el bloque para poder ver a los estudiantes en la pagina web

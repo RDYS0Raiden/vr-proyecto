@@ -61,3 +61,55 @@ exports.validarAccesoDescarga = async (username) => {
     return { acceso: false, message: error.message };
   }
 };
+//codigo login que devuelve rol
+exports.logini = async (username, password) => {
+  try {
+    // Buscar el usuario por nombre de usuario
+    const user = await ObjectPersonDAL.buscarUsuarioPorUsername(username);
+
+    if (!user) {
+      return { success: false, message: 'Usuario no encontrado' };
+    }
+
+    // Comparar la contraseña
+    const isMatch = await user.comparePassword(password);
+    if (isMatch) {
+      return {
+        success: true,
+        user: {
+          username: user.username,
+          rol: user.rol, // Incluir el rol del usuario
+        },
+      };
+    } else {
+      return { success: false, message: 'Contraseña incorrecta' };
+    }
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+};
+
+//
+//bloque de codigo para la tabla web
+const Usuarios = require('../entidades/usuarios');
+const Practicas = require('../entidades/practicas');
+
+// Obtener estudiantes junto con sus prácticas
+exports.obtenerEstudiantesConPracticas = async () => {
+    try {
+        const estudiantes = await Usuarios.find({}, 'name correo estado') // Obtiene los campos necesarios
+            .lean() // Convierte el resultado a objetos JS puros
+            .exec(); // Ejecuta la consulta
+
+        for (let estudiante of estudiantes) {
+            const practicas = await Practicas.find({ user: estudiante._id }); // Encuentra las prácticas del estudiante
+            estudiante.practicas = practicas; // Añade las prácticas al objeto estudiante
+        }
+
+        return estudiantes;
+    } catch (error) {
+        throw new Error('Error al obtener estudiantes y sus prácticas: ' + error.message);
+    }
+};
+
+//cierre de bloque

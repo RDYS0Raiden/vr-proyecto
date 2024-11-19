@@ -41,7 +41,8 @@
                     <a href="login.html" class="nav-item nav-link" id="login-link">Inicio de Sesión</a>
                     <a href="register.html" class="nav-item nav-link" id="register-link">Registrarse</a>
                     <a href="beneficios.html" class="nav-item nav-link">Beneficios</a>
-                    
+                    <a href="estudiantes.html" class="nav-item nav-link" id="estudiantes-link" style="display: none;">Estudiantes</a>
+
                     
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
                     <a href="#" onclick="logout()" class="nav-item nav-link" id="logout-link" style="display: none;">Cerrar Sesión</a>
@@ -195,7 +196,7 @@
                     <p class="mb-4" style="font-size: 1.2rem;">
                         Experimenta una nueva forma de aprendizaje práctico con nuestro avanzado simulador de realidad virtual diseñado específicamente para prácticas de operatoria dental y endodoncia. Mejora tus habilidades clínicas en un entorno seguro e interactivo.
                     </p>
-                    <a href="https://drive.google.com/your-download-link" target="_blank" class="btn btn-primary py-3 px-5 btn-download" style="font-size: 1.2rem;">
+                    <a href="https://drive.google.com/drive/folders/1ivatyTz9HE7FpxGblDF7AipZO2uf90z2?usp=drive_link" target="_blank" class="btn btn-primary py-3 px-5 btn-download" style="font-size: 1.2rem;">
                         <i class="fa fa-download mr-2"></i>Descargar Ahora
                     </a>
                 </div>
@@ -259,24 +260,22 @@
                     <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            
-            
-            
-            
-            
-
-            
+                      
         </div>
         
     </div>
     <!-- Footer End -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const username = localStorage.getItem('username');
+            const userRole = localStorage.getItem('userRole'); // Recuperar el rol del usuario desde localStorage
     
             if (username) {
                 // Mostrar la sección de descarga
-                document.getElementById('download-section').style.display = 'block';
+                const downloadSection = document.getElementById('download-section');
+                if (downloadSection) {
+                    downloadSection.style.display = 'block';
+                }
     
                 // Ocultar los botones de "Inicio de Sesión" y "Registrarse"
                 document.getElementById('login-link').style.display = 'none';
@@ -284,14 +283,39 @@
     
                 // Mostrar el botón de "Cerrar Sesión"
                 document.getElementById('logout-link').style.display = 'block';
+    
+                // Mostrar el enlace de "Estudiantes" solo si el rol es "docente"
+                if (userRole === 'docente') {
+                    const estudiantesLink = document.getElementById('estudiantes-link');
+                    if (estudiantesLink) {
+                        estudiantesLink.style.display = 'block';
+                    } else {
+                        console.error('El enlace "Estudiantes" no se encontró en el DOM.');
+                    }
+                } else {
+                    // Ocultar el enlace si no es docente
+                    const estudiantesLink = document.getElementById('estudiantes-link');
+                    if (estudiantesLink) {
+                        estudiantesLink.style.display = 'none';
+                    }
+                }
+            } else {
+                // Si no hay sesión, ocultar "Cerrar Sesión" y "Estudiantes"
+                document.getElementById('logout-link').style.display = 'none';
+                const estudiantesLink = document.getElementById('estudiantes-link');
+                if (estudiantesLink) {
+                    estudiantesLink.style.display = 'none';
+                }
             }
         });
     
         function logout() {
             localStorage.removeItem('username');
+            localStorage.removeItem('userRole'); // Limpiar también el rol al cerrar sesión
             window.location.href = 'index.html'; // Redirigir a la página principal
         }
     </script>
+    
     
     
 

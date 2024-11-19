@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiantes Eliminados</title>
+    <script>
+        const API_BASE_URL = 'http://localhost:4000'; // URL base de las APIs
+
+        async function cargarEstudiantesEliminados() {
+            const response = await fetch(`${API_BASE_URL}/estudiantesEliminados`);
+            const estudiantes = await response.json();
+            const tabla = document.getElementById('tablaEliminados');
+            tabla.innerHTML = ''; // Limpiar tabla
+
+            estudiantes.forEach(estudiante => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${estudiante.name}</td>
+                    <td>${estudiante.correo}</td>
+                    <td>${estudiante.estado ? "Activo" : "Inactivo"}</td>
+                    <td>
+                        <button onclick="restablecerEstudiante('${estudiante._id}')">Restablecer</button>
+                    </td>
+                `;
+                tabla.appendChild(fila);
+            });
+        }
+
+        async function buscarEstudiantesEliminados() {
+            const nombre = document.getElementById('buscarNombre').value;
+            const correo = document.getElementById('buscarCorreo').value;
+            const response = await fetch(`${API_BASE_URL}/buscarEstudiantesEliminados?nombre=${nombre}&correo=${correo}`);
+            const estudiantes = await response.json();
+            const tabla = document.getElementById('tablaEliminados');
+            tabla.innerHTML = ''; // Limpiar tabla
+
+            estudiantes.forEach(estudiante => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${estudiante.name}</td>
+                    <td>${estudiante.correo}</td>
+                    <td>${estudiante.estado ? "Activo" : "Inactivo"}</td>
+                    <td>
+                        <button onclick="restablecerEstudiante('${estudiante._id}')">Restablecer</button>
+                    </td>
+                `;
+                tabla.appendChild(fila);
+            });
+        }
+
+        async function restablecerEstudiante(id) {
+            await fetch(`${API_BASE_URL}/restablecerEstudiante/${id}`, { method: 'PUT' });
+            cargarEstudiantesEliminados();
+        }
+
+        // Cargar estudiantes eliminados al inicio
+        window.onload = cargarEstudiantesEliminados;
+    </script>
+</head>
+<body>
+    <h1>Estudiantes Eliminados</h1>
+    <div>
+        <input type="text" id="buscarNombre" placeholder="Buscar por nombre">
+        <input type="text" id="buscarCorreo" placeholder="Buscar por correo">
+        <button onclick="buscarEstudiantesEliminados()">Buscar</button>
+        <button onclick="window.location.href='estudiantes.html'">Activos</button>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaEliminados">
+            <!-- Los estudiantes eliminados se mostrarán aquí -->
+        </tbody>
+    </table>
+</body>
+</html>
