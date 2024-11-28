@@ -1,17 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudiantes Eliminados</title>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="index.html" class="navbar-brand px-lg-4 m-0">
+                <h1 class="m-0 display-4 text-uppercase text-white">VR</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4">
+                    <a href="index.html" class="nav-item nav-link active">Hogar</a>
+                    <a href="login.html" class="nav-item nav-link" id="login-link">Inicio de Sesión</a>
+                    <a href="register.html" class="nav-item nav-link" id="register-link">Registrarse</a>
+                    <a href="beneficios.html" class="nav-item nav-link">Beneficios</a>
+                    <a href="estudiantes.html" class="nav-item nav-link active" id="estudiantes-link" style="display: none;">Estudiantes</a>
+                    
+                    <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    <a href="#" onclick="logout()" class="nav-item nav-link" id="logout-link" style="display: none;">Cerrar Sesión</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Estudiantes Eliminados</h1>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Students Deleted Table Start -->
+    <div class="container py-5">
+        <div class="text-center mb-4">
+            <h2 class="text-uppercase text-secondary">Gestión de Estudiantes Eliminados</h2>
+        </div>
+        <div class="mb-4">
+            <div class="d-flex justify-content-center">
+                <input type="text" class="form-control bg-transparent border-primary p-3 mx-2" id="buscarNombre" placeholder="Buscar por nombre">
+                <input type="text" class="form-control bg-transparent border-primary p-3 mx-2" id="buscarCorreo" placeholder="Buscar por correo">
+                <button class="btn btn-primary px-4 mx-2" onclick="buscarEstudiantesEliminados()">Buscar</button>
+                <button class="btn btn-secondary px-4 mx-2" onclick="window.location.href='estudiantes.html'">Activos</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaEliminados">
+                    <!-- Los estudiantes eliminados se mostrarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Students Deleted Table End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">PONTE EN CONTACTO</h4>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Av. Argentina Nro 2083, Miraflores</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+591 77277872</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5" style="margin-left: auto;">
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">SÍGUENOS</h4>
+                <p>Síguenos en nuestras redes sociales</p>
+                <div class="d-flex justify-content-start">
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
     <script>
-        const API_BASE_URL = 'http://localhost:4000'; // URL base de las APIs
+        // Código JavaScript del archivo original
+        const API_BASE_URL = 'http://localhost:4000';
 
         async function cargarEstudiantesEliminados() {
             const response = await fetch(`${API_BASE_URL}/estudiantesEliminados`);
             const estudiantes = await response.json();
             const tabla = document.getElementById('tablaEliminados');
-            tabla.innerHTML = ''; // Limpiar tabla
+            tabla.innerHTML = '';
 
             estudiantes.forEach(estudiante => {
                 const fila = document.createElement('tr');
@@ -20,7 +144,7 @@
                     <td>${estudiante.correo}</td>
                     <td>${estudiante.estado ? "Activo" : "Inactivo"}</td>
                     <td>
-                        <button onclick="restablecerEstudiante('${estudiante._id}')">Restablecer</button>
+                        <button class="btn btn-success" onclick="restablecerEstudiante('${estudiante._id}')">Restablecer</button>
                     </td>
                 `;
                 tabla.appendChild(fila);
@@ -33,7 +157,7 @@
             const response = await fetch(`${API_BASE_URL}/buscarEstudiantesEliminados?nombre=${nombre}&correo=${correo}`);
             const estudiantes = await response.json();
             const tabla = document.getElementById('tablaEliminados');
-            tabla.innerHTML = ''; // Limpiar tabla
+            tabla.innerHTML = '';
 
             estudiantes.forEach(estudiante => {
                 const fila = document.createElement('tr');
@@ -42,7 +166,7 @@
                     <td>${estudiante.correo}</td>
                     <td>${estudiante.estado ? "Activo" : "Inactivo"}</td>
                     <td>
-                        <button onclick="restablecerEstudiante('${estudiante._id}')">Restablecer</button>
+                        <button class="btn btn-success" onclick="restablecerEstudiante('${estudiante._id}')">Restablecer</button>
                     </td>
                 `;
                 tabla.appendChild(fila);
@@ -54,30 +178,8 @@
             cargarEstudiantesEliminados();
         }
 
-        // Cargar estudiantes eliminados al inicio
         window.onload = cargarEstudiantesEliminados;
     </script>
-</head>
-<body>
-    <h1>Estudiantes Eliminados</h1>
-    <div>
-        <input type="text" id="buscarNombre" placeholder="Buscar por nombre">
-        <input type="text" id="buscarCorreo" placeholder="Buscar por correo">
-        <button onclick="buscarEstudiantesEliminados()">Buscar</button>
-        <button onclick="window.location.href='estudiantes.html'">Activos</button>
-    </div>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tablaEliminados">
-            <!-- Los estudiantes eliminados se mostrarán aquí -->
-        </tbody>
-    </table>
 </body>
+
 </html>

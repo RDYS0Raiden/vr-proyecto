@@ -27,7 +27,7 @@ router.post('/guardarPuntajeRESTA', practicasController.guardarPuntajeRESTA);
 //bloque de codigo para poder ver a los estudiantes en una tabla:
 
 // Rutas para manejo de estudiantes
-router.get('/estudiantesConPracticas', WebController.listarEstudiantesConPracticas);
+router.get('/estudiantesConPracticas' , WebController.listarEstudiantesConPracticas);
 router.get('/buscarEstudiantes', WebController.buscarEstudiantes);
 
 // Ruta para eliminación lógica

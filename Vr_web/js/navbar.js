@@ -1,7 +1,10 @@
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const username = localStorage.getItem('username');
     const userRole = localStorage.getItem('userRole'); // Recuperar el rol del usuario desde localStorage
-
+    const token = localStorage.getItem('token');
     if (username) {
         // Ocultar los botones de "Inicio de Sesión" y "Registrarse"
         const loginLink = document.getElementById('login-link');

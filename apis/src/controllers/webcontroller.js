@@ -55,7 +55,8 @@ exports.addpracticas= async (req, res) => {
 
     puntageCUEST_EN,
     puntageCUEST_OP,
-
+    puntageICDAS,
+    puntageRECO,
     } = req.body;
 
     
@@ -76,8 +77,9 @@ exports.addpracticas= async (req, res) => {
         tiempoINYE,
 
       puntageCUEST_EN,
-      puntageCUEST_OP
-
+      puntageCUEST_OP,
+      puntageICDAS,
+      puntageRECO
       );
       // El controlador solo necesita comprobar el mensaje de éxito
       if (resultado === '¡Practica guardada correctamente!') {
